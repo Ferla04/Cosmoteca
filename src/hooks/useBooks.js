@@ -1,35 +1,34 @@
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useRef, useCallback, useEffect } from 'react'
 import { searchBooks } from '../services/books'
+import { useDispatch, useSelector } from 'react-redux'
+import { onChangeQuery, onError, onLoading } from '../store'
 
-export const useBooks = ({ search }) => {
-  const [books, setBooks] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const previousSearch = useRef(search)
+export const useBooks = () => {
+  const { books, loading, error, query } = useSelector(state => state.bookStore)
+  const dispatch = useDispatch()
+  const previousSearch = useRef(query)
 
-  const getMovies = useCallback(async ({ search }) => {
-    if (search === previousSearch.current) return
+  const getBooks = useCallback(async (search = '') => {
+    if (search === previousSearch.current || !search) return
 
     try {
-      setLoading(true)
-      setError(null)
+      dispatch(onLoading())
 
       previousSearch.current = search
       const newBooks = await searchBooks({ search })
-      setBooks(newBooks)
+      dispatch(onChangeQuery({ books: newBooks, query: search }))
     } catch (e) {
-      setError(e.message)
-    } finally {
-      setLoading(false)
+      dispatch(onError({ error: e.message }))
     }
   }, [])
 
   useEffect(() => {
-    getMovies(search)
+    getBooks()
   }, [])
 
   return {
     books,
+    getBooks,
     loading,
     error
   }
