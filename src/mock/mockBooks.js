@@ -3,7 +3,8 @@ export const mockBooks = [
     id: 'uZHBDwAAQBAJ',
     title: 'Tokyo Ghoul 05',
     authors: [
-      'Sui Ishida'
+      'Sui Ishida',
+      'Fernanda velasquez'
     ],
     publisher: 'M&C!',
     image: 'http://books.google.com/books/content?id=uZHBDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'
@@ -13,7 +14,9 @@ export const mockBooks = [
     id: 'PfQvrgEACAAJ',
     title: 'Tokyo Ghoul',
     authors: [
-      'Sui Ishida'
+      'Sui Ishida',
+      'Juan',
+      'Camila'
     ],
     publisher: 'VIZ Media LLC',
     image: 'http://books.google.com/books/content?id=PfQvrgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api'

@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { mockBooks } from '../../mock/mockBooks'
 
 export const bookSlice = createSlice({
   name: 'book',
   initialState: {
     query: '',
-    books: mockBooks.slice(1),
+    books: [],
     loading: false,
     error: null,
-    favBooks: [mockBooks[0]]
+    favBooks: []
   },
   reducers: {
     onChangeQuery: (state, { payload }) => {

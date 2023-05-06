@@ -4,7 +4,7 @@ export const searchBooks = async ({ search }) => {
   if (search === '') return null
 
   try {
-    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?key=${API_KEY}&q=${search}&maxResults=4`)
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?key=${API_KEY}&q=${search}&maxResults=40`)
     const data = await response.json()
     const books = data.items
 
