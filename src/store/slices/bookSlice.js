@@ -6,7 +6,8 @@ export const bookSlice = createSlice({
     query: '',
     books: [],
     loading: false,
-    error: null
+    error: null,
+    favBooks: []
   },
   reducers: {
     onChangeQuery: (state, { payload }) => {
@@ -21,8 +22,18 @@ export const bookSlice = createSlice({
     onError: (state, { payload }) => {
       state.loading = false
       state.payload = payload.error
+    },
+    onAddFavBook: (state, { payload: { indexBook } }) => {
+      state.favBooks.push(state.books[indexBook])
+      state.books = [
+        ...state.books.slice(0, indexBook),
+        ...state.books.slice(indexBook + 1)
+      ]
+    },
+    onDeleteFavBook: (state, { payload }) => {
+      state.favBooks = state.favBooks.filter(book => book.id !== payload.id)
     }
   }
 })
 
-export const { onChangeQuery, onLoading, onError } = bookSlice.actions
+export const { onChangeQuery, onLoading, onError, onAddFavBook, onDeleteFavBook } = bookSlice.actions
