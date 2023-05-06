@@ -1,8 +1,9 @@
 import { useRef, useCallback, useEffect } from 'react'
-// import { searchBooks } from '../services/books'
+import { searchBooks } from '../services/books'
 import { useDispatch, useSelector } from 'react-redux'
 import { onChangeQuery, onError, onAddFavBook, onLoading, onDeleteFavBook } from '../store'
-import { mockBooks } from '../mock/mockBooks'
+// import { mockBooks } from '../mock/mockBooks'
+import { createNewListBooks } from '../utils/createNewListBooks'
 
 export const useBooks = () => {
   const { books, loading, error, query, favBooks } = useSelector(state => state.bookStore)
@@ -16,13 +17,17 @@ export const useBooks = () => {
       dispatch(onLoading())
 
       previousSearch.current = search
-      // const newBooks = await searchBooks({ search })
-      const newBooks = mockBooks
+      let newBooks = await searchBooks({ search })
+      // let newBooks = mockBooks
+
+      if (favBooks.length > 0) {
+        newBooks = createNewListBooks({ newBooks, favBooks })
+      }
       dispatch(onChangeQuery({ books: newBooks, query: search }))
     } catch (e) {
       dispatch(onError({ error: e.message }))
     }
-  }, [])
+  }, [favBooks])
 
   useEffect(() => {
     getBooks()
