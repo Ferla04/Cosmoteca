@@ -18,7 +18,7 @@ export function Search () {
       </form>
 
       {
-        loading ? <p>Cargando...</p> : <Books books={books} />
+        loading ? <p>Cargando...</p> : <Books books={books} buttonText='Add Fav' />
       }
     </section>
   )

@@ -1,6 +1,6 @@
 import { useBooks } from '../hooks/useBooks'
 
-export function Books ({ books }) {
+export function Books ({ books, buttonText }) {
   const { likeBooks } = useBooks()
 
   return (
@@ -10,7 +10,7 @@ export function Books ({ books }) {
           <li key={book.id}>
             <img src={book.image} alt='hey' />
             <h2>{book.title}</h2>
-            <button onClick={() => likeBooks(book.id)}>Fav</button>
+            <button onClick={() => likeBooks(book.id)}>{buttonText}</button>
           </li>
         ))
       }

@@ -6,7 +6,7 @@ export function FavBooks () {
 
   return (
     <section style={{ backgroundColor: 'red' }}>
-      <Books books={favBooks} />
+      <Books books={favBooks} buttonText='Delete' />
     </section>
   )
 }
